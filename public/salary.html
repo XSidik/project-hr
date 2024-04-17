@@ -1,0 +1,398 @@
+<!-- public/dashboard.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        #salaryList {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .no-col,
+        .status-col,
+        .nik-col,
+        .name-col,
+        .tanggal-gaji-col,
+        .upah-pokok-col,
+        .tunjangan-jabatan-col,
+        .tunjangan-masa-kerja-col,
+        .tunjangan-transport-col,
+        .tunjangan-uang-makan-col,
+        .uang-makan-long-shift1-col,
+        .uang-makan-long-shift2-col,
+        .tunjangan-shift2-col,
+        .tunjangan-shift3-col,
+        .premi-kehadiran-col,
+        .upah-lembur-hari-biasa-jam-col,
+        .upah-lembur-hari-biasa-harga-col,
+        .upah-lembur-hari-libur-jam-col,
+        .upah-lembur-hari-libur-harga-col,
+        .komplain-bulan-lalu-col,
+        .penggantian-cuti-col,
+        .potongan-absensi-col,
+        .potongan-bpjs-dan-jamsostek-col,
+        .potongan-koperasi-col,
+        .potongan-pinjaman-col,
+        .potongan-lain-lain-col,
+        .dana-pensiun-col,
+        .pph21-col {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .no-col {
+            width: 50px !important;
+        }
+
+        .status-col {
+            width: 100px !important;
+        }
+
+        .nik-col {
+            width: 100px !important;
+        }
+
+        .name-col {
+            width: 200px !important;
+        }
+
+        .tanggal-gaji-col {
+            width: 150px !important;
+        }
+
+        .upah-pokok-col {
+            width: 120px !important;
+        }
+
+        .tunjangan-jabatan-col {
+            width: 200px !important;
+        }
+
+        .tunjangan-masa-kerja-col {
+            width: 250px !important;
+        }
+
+        .tunjangan-transport-col {
+            width: 250px !important;
+        }
+
+        .tunjangan-uang-makan-col {
+            width: 250px !important;
+        }
+
+        .uang-makan-long-shift1-col {
+            width: 250px !important;
+        }
+
+        .uang-makan-long-shift2-col {
+            width: 250px !important;
+        }
+
+        .tunjangan-shift2-col {
+            width: 200px !important;
+        }
+
+        .tunjangan-shift3-col {
+            width: 200px !important;
+        }
+
+        .premi-kehadiran-col {
+            width: 200px !important;
+        }
+
+        .upah-lembur-hari-biasa-jam-col {
+            width: 300px !important;
+        }
+
+        .upah-lembur-hari-biasa-harga-col {
+            width: 300px !important;
+        }
+
+        .upah-lembur-hari-libur-jam-col {
+            width: 300px !important;
+        }
+
+        .upah-lembur-hari-libur-harga-col {
+            width: 300px !important;
+        }
+
+        .komplain-bulan-lalu-col {
+            width: 250px !important;
+        }
+
+        .penggantian-cuti-col {
+            width: 200px !important;
+        }
+
+        .potongan-absensi-col {
+            width: 200px !important;
+        }
+
+        .potongan-bpjs-dan-jamsostek-col {
+            width: 300px !important;
+        }
+
+        .potongan-koperasi-col {
+            width: 250px !important;
+        }
+
+        .potongan-pinjaman-col {
+            width: 250px !important;
+        }
+
+        .potongan-lain-lain-col {
+            width: 250px !important;
+        }
+
+        .dana-pensiun-col {
+            width: 200px !important;
+        }
+
+        .pph21-col {
+            width: 200px !important;
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/dashboard.html">Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/employee.html">Employee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/salary.html">Salary Slip</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/whatsapp">Whatsapp</a>
+                    </li>
+                </ul>
+                <!-- Add logout button -->
+                <button class="btn btn-outline-danger" id="logoutBtn">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col">
+                <h2>Salaries</h2>
+            </div>
+            <div class="col text-end">
+                <!-- <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                    data-bs-target="#modalAddSalary">
+                    Add
+                </button> -->
+                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                    data-bs-target="#modalUploadSalary">
+                    Upload
+                </button>
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                    data-bs-target="#modalSendSalary">
+                    Send Payslip to Whatsapp
+                </button>
+            </div>
+        </div>
+        <form id="searchForm" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" id="searchInput" placeholder="Search by name,nik">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+        <div class="table-responsive">
+            <table id="salaryList" class="table table-bordered table-striped">
+                <thead>
+                    <tr class="text-uppercase">
+                        <th class="no-col" title="Nomor Urut">No</th>
+                        <th class="status-col" title="Status">Status</th>
+                        <th class="nik-col" title="Nik">Nik</th>
+                        <th class="name-col" title="Name">Name</th>
+                        <th class="tanggal-gaji-col" title="Tanggal Gaji">Tanggal Gaji</th>
+                        <th class="upah-pokok-col" title="Upah Pokok">Upah Pokok</th>
+                        <th class="tunjangan-jabatan-col" title="Tunjangan Jabatan">Tunjangan Jabatan</th>
+                        <th class="tunjangan-masa-kerja-col" title="Tunjangan Masa Kerja">Tunjangan Masa Kerja</th>
+                        <th class="tunjangan-transport-col" title="Tunjangan Transport">Tunjangan Transport</th>
+                        <th class="tunjangan-uang-makan-col" title="Tunjangan Uang Makan">Tunjangan Uang Makan</th>
+                        <th class="uang-makan-long-shift1-col" title="Uang Makan Long Shift1">Uang Makan Long Shift1
+                        </th>
+                        <th class="uang-makan-long-shift2-col" title="Uang Makan Long Shift2">Uang Makan Long Shift2
+                        </th>
+                        <th class="tunjangan-shift2-col" title="Tunjangan Shift2">Tunjangan Shift2</th>
+                        <th class="tunjangan-shift3-col" title="Tunjangan Shift3">Tunjangan Shift3</th>
+                        <th class="premi-kehadiran-col" title="Premi Kehadiran">Premi Kehadiran</th>
+                        <th class="upah-lembur-hari-biasa-jam-col" title="Upah Lembur Hari Biasa Jam">Upah Lembur Hari
+                            Biasa Jam</th>
+                        <th class="upah-lembur-hari-biasa-harga-col" title="Upah Lembur Hari Biasa Harga">Upah Lembur
+                            Hari Biasa Harga</th>
+                        <th class="upah-lembur-hari-libur-jam-col" title="Upah Lembur Hari Libur Jam">Upah Lembur Hari
+                            Libur Jam</th>
+                        <th class="upah-lembur-hari-libur-harga-col" title="Upah Lembur Hari Libur Harga">Upah Lembur
+                            Hari Libur Harga</th>
+                        <th class="komplain-bulan-lalu-col" title="Komplain Bulan Lalu">Komplain Bulan Lalu</th>
+                        <th class="penggantian-cuti-col" title="Penggantian Cuti">Penggantian Cuti</th>
+                        <th class="potongan-absensi-col" title="Potongan Absensi">Potongan Absensi</th>
+                        <th class="potongan-bpjs-dan-jamsostek-col" title="Potongan BPJS dan Jamsostek">Potongan BPJS
+                            dan Jamsostek</th>
+                        <th class="potongan-koperasi-col" title="Potongan Koperasi">Potongan Koperasi</th>
+                        <th class="potongan-pinjaman-col" title="Potongan Pinjaman">Potongan Pinjaman</th>
+                        <th class="potongan-lain-lain-col" title="Potongan Lain Lain">Potongan Lain Lain</th>
+                        <th class="dana-pensiun-col" title="Dana Pensiun">Dana Pensiun</th>
+                        <th class="pph21-col" title="PPH21">PPH21</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-between bd-highlight mb-3">
+            <div class="p-2 bd-highlight">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <span class="pagination-info" id="paginationInfo"></span>
+                    </div>
+                    <div class="col-auto">
+                        <select id="pageSizeSelect" class="form-select">
+                            <option value="5">5</option>
+                            <option value="10" selected>10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <span>rows per page</span>
+                    </div>
+                </div>
+            </div>
+            <div class="p-2 bd-highlight">
+                <!-- Pagination -->
+                <nav>
+                    <ul class="pagination justify-content-end" id="pagination">
+                        <li class="page-item" id="firstPage">
+                            <a class="page-link" href="#" aria-label="First">
+                                <span aria-hidden="true">&laquo;&laquo;</span>
+                                <span class="sr-only">First</span>
+                            </a>
+                        </li>
+                        <li class="page-item" id="prevPage">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <ul id="pageNumbers" class="pagination"></ul>
+                        <li class="page-item" id="nextPage">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                        <li class="page-item" id="lastPage">
+                            <a class="page-link" href="#" aria-label="Last">
+                                <span aria-hidden="true">&raquo;&raquo;</span>
+                                <span class="sr-only">Last</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal upload -->
+    <div class="modal fade" id="modalUploadSalary" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalUploadSalaryLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalUploadSalaryLabel">Upload Salary</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <span>only .csv file</span>
+                    <br />
+                    <input type="file" id="csvFileSalary" accept=".csv">
+                </div>
+                <div class="modal-footer">
+                    <span id="errorUpload" style="color: red;"></span>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-outline-primary" id="uploadData">upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal send wa -->
+    <div class="modal fade" id="modalSendSalary" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalSendSalaryLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalSendSalaryLabel">Send Payslip to Wa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <span>proses ini memakan waktu lumayan lama...</span>
+                    <br>
+                    <span>pastikan wa sudah terkoneksi sebelum menekan tombol send</span>
+                </div>
+                <div class="modal-footer">
+                    <span id="errorUpload" style="color: red;"></span>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-outline-primary" id="sendPayslip">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal loading -->
+    <div class="modal" id="loadingModal" tabindex="-1" aria-labelledby="loadingModalLabel" aria-hidden="true"
+        data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Please wait while the file is being sent....</p>
+                    <br />
+                    <span>do not refresh!!!!</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/salary.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+</body>
+
+</html>
