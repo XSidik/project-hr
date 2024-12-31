@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require('path');
 const qrcode = require('qrcode');
 const { Client, LocalAuth, MessageMedia } = require('whatsapp-web.js');
+// const { Client, MessageMedia } = require('whatsapp-web.js');
 const Wa = require('../models/wa');
 const { Op } = require('sequelize');
 const fs = require('fs');
@@ -14,13 +15,14 @@ const Company = require('../models/company');
 
 const puppeteer = require('puppeteer');
 
-const client = new Client({
-    restartOnAuthFail: true,
-    authStrategy: new LocalAuth()
-});
+// const client = new Client({
+//     restartOnAuthFail: true,
+//     authStrategy: new LocalAuth()
+// });
 
+const client = new Client();
 
-module.exports = function (io) {
+module.exports = function (io) {    
 
     router.get('/', (req, res) => {
         res.sendFile('./public/whatsapp.html', { root: path.join(__dirname, '../') });
@@ -30,9 +32,17 @@ module.exports = function (io) {
     const now = today.toLocaleString();
 
     client.on('qr', (qr) => {
+        // qrcode.generate(qr, {
+        //     small: true
+        // });
+
         qrcode.toDataURL(qr, (err, url) => {
             // Emit QR code to connected sockets
             // You need to set up socket.io for this to work
+            if (err) {
+                console.error('Failed to generate QR code:', err);
+                return;
+            }
             io.emit("qr", url);
             io.emit('message', `${now} QR Code received`);
         });
@@ -869,7 +879,7 @@ module.exports = function (io) {
             const message = "hii " + employee.name + ", ini adalah slip gaji untuk " + getStringDate(salary.tanggal_gaji);
 
             sendFile(client, phone, message, pdfPath).then((res) => console.log(res));
-            await delay(5000);
+            await delay(30000);
         }
 
         res.status(200).json({

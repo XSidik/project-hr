@@ -19,11 +19,13 @@ const EmployeeRoutes = require('./routes/employee');
 const SalaryRoutes = require('./routes/salary');
 const WaRoutes = require('./routes/whatsapp');
 const SendWaRoutes = require('./routes/send_wa');
+const { Server } = require('socket.io');
 
 // Server and Socket.io setup
 const app = express();
 const server = http.createServer(app);
-const io = require('socket.io')(server);
+// const io = require('socket.io')(server);
+const io = new Server(server);
 
 // Middleware setup
 app.use(bodyParser.json());

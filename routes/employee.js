@@ -6,6 +6,7 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const fs = require('fs');
 const csv = require('csv-parser');
+const { create } = require('domain');
 
 router.get('/', async (req, res) => {
     const page = parseInt(req.query.page) || 1;
@@ -30,8 +31,8 @@ router.get('/', async (req, res) => {
             offset,
             limit,
             order: [
-                ['updatedAt', 'DESC'],
-                ['createdAt', 'DESC']
+                ['updated_at', 'DESC'],
+                ['created_at', 'DESC']
             ]
         });
 
@@ -53,7 +54,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const { name, whatsapp_number, nik, date_of_entry, status, departement, position } = req.body;
-        const newEmployee = await Employee.create({ name, whatsapp_number, nik, date_of_entry, status, departement, position, createdBy: req.user.id });
+        const newEmployee = await Employee.create({ name, whatsapp_number, nik, date_of_entry, status, departement, position, created_by: req.user.id, updated_by: req.user.id, created_at: new Date(), updated_at: new Date() });
         res.status(201).json(newEmployee);
     } catch (error) {
         res.status(400).json({ message: error.original.message });
@@ -64,7 +65,7 @@ router.put('/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const { name, whatsapp_number, nik, date_of_entry, status, departement, position } = req.body;
-        const [updated] = await Employee.update({ name, whatsapp_number, nik, date_of_entry, status, departement, position, updatedBy: req.user.id }, {
+        const [updated] = await Employee.update({ name, whatsapp_number, nik, date_of_entry, status, departement, position, updated_by: req.user.id }, {
             where: { id }
         });
         if (updated) {
