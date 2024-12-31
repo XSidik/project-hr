@@ -5,11 +5,11 @@ const Companies = sequelize.define('Wa', {
     is_active: {
         type: DataTypes.BOOLEAN,
     },
-    createdBy: {
+    created_by: {
         type: DataTypes.INTEGER,
         allowNull: true
     },
-    updatedBy: {
+    updated_by: {
         type: DataTypes.INTEGER,
         allowNull: true
     }

@@ -50,7 +50,7 @@ $(document).ready(function () {
             <td>${rowNumber}</td>
             <td><span>a</span></td>
             <td>${data.nik}</td>
-            <td>${data.Employee.name}</td>
+            <td>${data.employee.name}</td>
             <td>${data.tanggal_gaji}</td>
             <td>${data.upah_pokok}</td>
             <td>${data.tunjangan_jabatan}</td>

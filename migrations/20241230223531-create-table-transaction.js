@@ -3,50 +3,16 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Companies', {
+    await queryInterface.createTable('tran_salaries', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true
       },
-      name: {
+      status: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-      },
-      sub_name: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-      image: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-      createdBy: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
-      updatedBy: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false
-      }
-    });
-
-    await queryInterface.createTable('TranSalaries', {
-      id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
+        allowNull: true,
       },
       nik: {
         type: Sequelize.STRING,
@@ -148,27 +114,26 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true
       },
-      createdBy: {
+      created_by: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       },
-      updatedBy: {
+      updated_by: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       },
-      createdAt: {
+      created_at: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true
       },
-      updatedAt: {
+      updated_at: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true
       }
     });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Companies');
-    await queryInterface.dropTable('TranSalaries');
+    await queryInterface.dropTable('tran_salaries');
   }
 };

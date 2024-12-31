@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const User = sequelize.define('User', {
+const User = sequelize.define('users', {
     user_name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -16,14 +16,24 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    createdBy: {
+    created_by: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: false
     },
-    updatedBy: {
+    updated_by: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: false
+    },
+    created_at: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false
     }
+}, {
+    timestamps: false,
 });
 
 module.exports = User;

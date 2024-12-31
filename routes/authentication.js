@@ -28,7 +28,7 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ message: 'Authentication failed' });
         }
         const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (isPasswordValid) {
+        if (isPasswordValid) {            
             const token = jwt.encode({ id: user.id, username }, secretKey);
             res.json({ token });
         } else {

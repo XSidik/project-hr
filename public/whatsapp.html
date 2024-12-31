@@ -22,6 +22,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="/company.html">Company</a>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="/employee.html">Employee</a>
                     </li>
@@ -95,14 +98,29 @@
     <script>
         $(document).ready(function () {
             var socket = io();
+
+            socket.on('connect', function () {
+                console.log('Connected to the server');
+            });
+
+            socket.on('disconnect', function () {
+                console.log('Disconnected from the server');
+            });
+
             var logsEl = $("#logs");
 
             socket.on('message', function (msg) {
+                console.log('Message received:', msg);
                 logsEl.append($('<li>').text(msg));
             });
 
             socket.on('qr', function (qr) {
+                console.log('QR Code received:', qr);
                 $("#qrcode").attr("src", qr);
+            });
+
+            socket.on('connect_error', function (error) {
+                console.error('Connection Error:', error);
             });
         });
     </script>

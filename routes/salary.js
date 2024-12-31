@@ -51,8 +51,8 @@ router.get('/', async (req, res) => {
             offset,
             limit,
             order: [
-                ['updatedAt', 'DESC'],
-                ['createdAt', 'DESC']
+                ['updated_at', 'DESC'],
+                ['created_at', 'DESC']
             ]
         });
 
@@ -74,7 +74,7 @@ router.get('/', async (req, res) => {
 // router.post('/', async (req, res) => {
 //     try {
 //         const { name, whatsapp_number, nik, date_of_entry, status, departement, position } = req.body;
-//         const newSalary = await Salary.create({ name, whatsapp_number, nik, date_of_entry, status, departement, position, createdBy: req.user.id });
+//         const newSalary = await Salary.create({ name, whatsapp_number, nik, date_of_entry, status, departement, position, created_by: req.user.id });
 //         res.status(201).json(newSalary);
 //     } catch (error) {
 //         res.status(400).json({ message: error.original.message });
@@ -85,7 +85,7 @@ router.get('/', async (req, res) => {
 //     const { id } = req.params;
 //     try {
 //         const { name, whatsapp_number, nik, date_of_entry, status, departement, position } = req.body;
-//         const [updated] = await Salary.update({ name, whatsapp_number, nik, date_of_entry, status, departement, position, updatedBy: req.user.id }, {
+//         const [updated] = await Salary.update({ name, whatsapp_number, nik, date_of_entry, status, departement, position, updated_by: req.user.id }, {
 //             where: { id }
 //         });
 //         if (updated) {

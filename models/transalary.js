@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const TranSalaries = sequelize.define('TranSalaries', {
+const TranSalaries = sequelize.define('tran_salaries', {
     status: {
         type: DataTypes.STRING,
         allowNull: true,
@@ -106,14 +106,24 @@ const TranSalaries = sequelize.define('TranSalaries', {
         type: DataTypes.STRING,
         allowNull: true
     },
-    createdBy: {
+    created_by: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: false
     },
-    updatedBy: {
+    updated_by: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: false
+    },
+    created_at: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    updated_at: {
+        type: DataTypes.DATE,
+        allowNull: false
     }
+}, {
+    timestamps: false,
 });
 
 module.exports = TranSalaries;
